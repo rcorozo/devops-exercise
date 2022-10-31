@@ -46,8 +46,9 @@ func notFound(w http.ResponseWriter, r *http.Request) {
 
 func handleRequests() {
 	router := mux.NewRouter().StrictSlash(true)
-	router.HandleFunc("/DevOps", devOps)
+	router.HandleFunc("/DevOps", devOps).Methods("POST")
 	router.NotFoundHandler = http.HandlerFunc(notFound)
+	router.MethodNotAllowedHandler = http.HandlerFunc(notFound)
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
 
