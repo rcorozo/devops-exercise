@@ -23,6 +23,7 @@ type serverReplyMessage struct {
 }
 
 var mySigningKey = []byte("captainjacksparrowsayshi")
+var myAPIKey = "2f5ae96c-b558-4c7b-a590-a501ae1c3f6c"
 
 func devOps(w http.ResponseWriter, r *http.Request) {
 	var newMessage userMessage
@@ -44,26 +45,51 @@ func devOps(w http.ResponseWriter, r *http.Request) {
 func isAuthorized(endpoint func(http.ResponseWriter, *http.Request)) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
-		if r.Header["Token"] != nil {
+		if r.Header.Get("X-Parse-REST-API-Key") != "" && r.Header.Get("X-JWT-KWY") != "" {
+			if r.Header.Get("X-Parse-REST-API-Key") == myAPIKey {
+				token, err := jwt.Parse(r.Header.Get("X-JWT-KWY"), func(token *jwt.Token) (interface{}, error) {
+					if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+						return nil, fmt.Errorf("There was an error")
+					}
+					return mySigningKey, nil
+				})
 
-			token, err := jwt.Parse(r.Header["Token"][0], func(token *jwt.Token) (interface{}, error) {
-				if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
-					return nil, fmt.Errorf("There was an error")
+				if err != nil {
+					fmt.Fprintf(w, err.Error())
 				}
-				return mySigningKey, nil
-			})
 
-			if err != nil {
-				fmt.Fprintf(w, err.Error())
-			}
-
-			if token.Valid {
-				endpoint(w, r)
+				if token.Valid {
+					endpoint(w, r)
+				}
+			} else {
+				w.WriteHeader(500)
+				fmt.Fprintf(w, "Provided APIKey is not correct.")
 			}
 		} else {
-
-			fmt.Fprintf(w, "Not Authorized")
+			w.WriteHeader(500)
+			fmt.Fprintf(w, "You have to set X-Parse-REST-API-Key and X-JWT-KWY to use the API.")
 		}
+
+		// if r.Header["Token"] != nil {
+
+		// 	token, err := jwt.Parse(r.Header["Token"][0], func(token *jwt.Token) (interface{}, error) {
+		// 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+		// 			return nil, fmt.Errorf("There was an error")
+		// 		}
+		// 		return mySigningKey, nil
+		// 	})
+
+		// 	if err != nil {
+		// 		fmt.Fprintf(w, err.Error())
+		// 	}
+
+		// 	if token.Valid {
+		// 		endpoint(w, r)
+		// 	}
+		// } else {
+
+		// 	fmt.Fprintf(w, "Not Authorized")
+		// }
 	})
 }
 
