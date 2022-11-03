@@ -8,11 +8,10 @@ terraform {
 }
 
 provider "linode" {
-  # token = "YOUR_LINODE_API_TOKEN"
 }
 
-resource "linode_lke_cluster" "my-cluster" {
-    label       = "my-cluster"
+resource "linode_lke_cluster" "bpiche-assessment" {
+    label       = "bpiche-assessment"
     k8s_version = "1.23"
     region      = "us-central"
     tags        = ["terraform"]
