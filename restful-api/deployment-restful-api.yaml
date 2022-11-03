@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jwt-generator
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      role: jwt-generator
+  template:
+    metadata:
+      labels:
+        role: jwt-generator
+    spec:
+      containers:
+      - name: jwt-generator
+        image: soyrodericus/devops:jwtgenerator-v1
+        ports:
+        - containerPort: 9001
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: restful-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      role: restful-api
+  template:
+    metadata:
+      labels:
+        role: restful-api
+    spec:
+      containers:
+      - name: restful-api
+        image: soyrodericus/devops:restfulapi-v1
+        ports:
+        - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jwt-generator
+spec:
+  ports:
+  - port: 8080
+    targetPort: 9001
+  selector:
+    role: jwt-generator
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: restful-api
+spec:
+  ports:
+  - port: 8080
+    targetPort: 8080
+  selector:
+    role: restful-api

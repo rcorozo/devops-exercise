@@ -21,3 +21,20 @@ resource "linode_lke_cluster" "bpiche-assessment" {
         count = 3
     }
 }
+
+output "kubeconfig" {
+   value = linode_lke_cluster.bpiche-assessment.kubeconfig
+   sensitive = true
+}
+
+output "api_endpoints" {
+   value = linode_lke_cluster.bpiche-assessment.api_endpoints
+}
+
+output "status" {
+   value = linode_lke_cluster.bpiche-assessment.status
+}
+
+output "id" {
+   value = linode_lke_cluster.bpiche-assessment.id
+}

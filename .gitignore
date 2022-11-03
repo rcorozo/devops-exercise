@@ -3,3 +3,5 @@ restful-api/jwt-generator/jwt-generator
 notes.txt
 commnad-to-test-endpoint.sh
 **/.terraform/
+to-do.md
+terraform/lke-cluster-config.yaml
