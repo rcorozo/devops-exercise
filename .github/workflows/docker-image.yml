@@ -23,7 +23,7 @@ jobs:
         uses: golangci/golangci-lint-action@v3
         with:
           version: v1.29
-          working-directory: restful-api
+          working-directory: restful-api/go-rest-api
 
   build:
     runs-on: ubuntu-latest
