@@ -1,9 +1,11 @@
 name: kubectl admin
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    branches: [ main ]
+  #push:
+    #branches:
+      #- main
 
 jobs:
 
