@@ -3,14 +3,18 @@ name: Build Docker images
 on:
   workflow_dispatch:
     branches: [ main ]
-  push:
-    branches: [ main ]
+  #push:
+    #branches: [ main ]
 
 jobs:
 
   build:
     runs-on: ubuntu-latest
     steps:
+      -
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       -
         name: Get changed files in the restful-api folder
         id: changed-files-specific
