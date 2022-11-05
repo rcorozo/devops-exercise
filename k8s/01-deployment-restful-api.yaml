@@ -15,6 +15,13 @@ spec:
       containers:
       - name: jwt-generator
         image: soyrodericus/jwtgenerator
+        imagePullPolicy: Always
+        env:
+        - name: mySigningKey
+          valueFrom:
+            secretKeyRef:
+              name: test-env-secret
+              key: mySigningKey
         ports:
         - containerPort: 9001
 
@@ -36,6 +43,18 @@ spec:
       containers:
       - name: restful-api
         image: soyrodericus/restfulapi
+        imagePullPolicy: Always
+        env:
+        - name: myAPIKey
+          valueFrom:
+            secretKeyRef:
+              name: test-env-secret
+              key: myAPIKey
+        - name: mySigningKey
+          valueFrom:
+            secretKeyRef:
+              name: test-env-secret
+              key: mySigningKey
         ports:
         - containerPort: 8080
 

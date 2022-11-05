@@ -1,4 +1,5 @@
 **/.terraform/
+k8s/01-02-secret.yaml
 terraform/kubeconfig**
 commnad-to-test-endpoint.sh
 notes.txt
