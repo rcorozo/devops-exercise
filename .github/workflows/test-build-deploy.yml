@@ -1,4 +1,4 @@
-name: Build Docker images
+name: Test, Build and Deploy
 
 on:
   workflow_dispatch:
@@ -33,6 +33,7 @@ jobs:
         continue-on-error: true
 
   build:
+    needs: [test]
     runs-on: ubuntu-latest
     steps:
       -
@@ -78,3 +79,21 @@ jobs:
           context: "{{defaultContext}}:restful-api/jwt-generator"
           push: true
           tags: soyrodericus/jwtgenerator:${{ github.ref_name }}-${{ steps.vars.outputs.sha_short }}
+    outputs:
+      imageName: ${{ github.ref_name }}-${{ steps.vars.outputs.sha_short }}
+  
+  deploy:
+    needs: [build]
+    runs-on: ubuntu-latest
+    environment: 
+      name: prod
+      url: https://restapi.rodrigocorozo.com
+    steps:
+      -
+        name: Deployment update
+        uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+          IMAGE_REF: ${{ needs.build.outputs.imageName }}
+        with:
+          args: envsubst < k8s/01-deployment-restful-api.yaml | kubectl apply -f -
