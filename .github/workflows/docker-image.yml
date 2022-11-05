@@ -8,27 +8,29 @@ on:
     paths: ['restful-api/**']
 
 jobs:
-  # test:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - 
-  #       uses: actions/setup-go@v3
-  #       with:
-  #         go-version: 1.17
-  #     - 
-  #       uses: actions/checkout@v3
-  #     - 
-  #       name: restful-api/go-rest-api lint
-  #       uses: golangci/golangci-lint-action@v3
-  #       with:
-  #         version: v1.29
-  #         working-directory: restful-api/go-rest-api
-  #     - 
-  #       name: restful-api/go-rest-api lint
-  #       uses: golangci/golangci-lint-action@v3
-  #       with:
-  #         version: v1.29
-  #         working-directory: restful-api/go-rest-api
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - 
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.17
+      - 
+        uses: actions/checkout@v3
+      - 
+        name: restful-api/go-rest-api lint
+        uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.29
+          working-directory: restful-api/go-rest-api
+        continue-on-error: true
+      - 
+        name: restful-api/go-rest-api lint
+        uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.29
+          working-directory: restful-api/go-rest-api
+        continue-on-error: true
 
   build:
     runs-on: ubuntu-latest
