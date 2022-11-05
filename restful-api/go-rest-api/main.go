@@ -6,6 +6,7 @@ import (
     "io/ioutil"
     "log"
     "net/http"
+	"os"
 
     jwt "github.com/dgrijalva/jwt-go"
     "github.com/gorilla/mux"
@@ -23,7 +24,7 @@ type serverReplyMessage struct {
 }
 
 var mySigningKey = []byte("captainjacksparrowsayshi")
-var myAPIKey = "2f5ae96c-b558-4c7b-a590-a501ae1c3f6c"
+var myAPIKey = os.Getenv("myAPIKey")
 
 func devOps(w http.ResponseWriter, r *http.Request) {
     var newMessage userMessage
@@ -33,7 +34,6 @@ func devOps(w http.ResponseWriter, r *http.Request) {
     }
 
     json.Unmarshal(reqBody, &newMessage)
-    //w.Header().Set("Content-Type","application/json")
     w.WriteHeader(http.StatusOK)
 
     var newReply serverReplyMessage
