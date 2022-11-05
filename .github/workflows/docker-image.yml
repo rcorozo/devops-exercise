@@ -25,11 +25,11 @@ jobs:
           working-directory: restful-api/go-rest-api
         continue-on-error: true
       - 
-        name: restful-api/go-rest-api lint
+        name: restful-api/jwt-generator lint
         uses: golangci/golangci-lint-action@v3
         with:
           version: v1.29
-          working-directory: restful-api/go-rest-api
+          working-directory: restful-api/jwt-generator
         continue-on-error: true
 
   build:
