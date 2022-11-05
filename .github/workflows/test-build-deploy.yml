@@ -92,8 +92,8 @@ jobs:
       -
         name: Install some OS packages
         run: |
-          apt update
-          apt install -y gettext-base
+          sudo apt update
+          sudo apt install -y gettext-base
       -
         name: Deployment update
         uses: actions-hub/kubectl@master
