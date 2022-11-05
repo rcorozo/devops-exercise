@@ -90,6 +90,10 @@ jobs:
       url: https://restapi.rodrigocorozo.com
     steps:
       -
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      -
         name: Updating Docker images name
         env:
           imageName: ${{ needs.build.outputs.imageName }}
