@@ -2,10 +2,10 @@ FROM golang:alpine AS builder
 WORKDIR /build
 COPY go.mod .
 COPY go.sum .
-COPY jwt-generator.go jwt-generator.go
+COPY main.go main.go
 RUN \
     go mod download && \
-    go build -o JWTGenerator jwt-generator.go
+    go build -o JWTGenerator main.go
 
 FROM alpine
 WORKDIR /build

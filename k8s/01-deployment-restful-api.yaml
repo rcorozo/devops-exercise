@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: jwt-generator
-        image: soyrodericus/devops:jwtgenerator-v1
+        image: soyrodericus/jwtgenerator
         ports:
         - containerPort: 9001
 
@@ -35,7 +35,7 @@ spec:
     spec:
       containers:
       - name: restful-api
-        image: soyrodericus/devops:restfulapi-v1
+        image: soyrodericus/restfulapi
         ports:
         - containerPort: 8080
 

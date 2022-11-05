@@ -8,22 +8,27 @@ on:
     paths: ['restful-api/**']
 
 jobs:
-  test:
-    name: lint
-    runs-on: ubuntu-latest
-    steps:
-      - 
-        uses: actions/setup-go@v3
-        with:
-          go-version: 1.17
-      - 
-        uses: actions/checkout@v3
-      - 
-        name: golangci-lint
-        uses: golangci/golangci-lint-action@v3
-        with:
-          version: v1.29
-          working-directory: restful-api/go-rest-api
+  # test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - 
+  #       uses: actions/setup-go@v3
+  #       with:
+  #         go-version: 1.17
+  #     - 
+  #       uses: actions/checkout@v3
+  #     - 
+  #       name: restful-api/go-rest-api lint
+  #       uses: golangci/golangci-lint-action@v3
+  #       with:
+  #         version: v1.29
+  #         working-directory: restful-api/go-rest-api
+  #     - 
+  #       name: restful-api/go-rest-api lint
+  #       uses: golangci/golangci-lint-action@v3
+  #       with:
+  #         version: v1.29
+  #         working-directory: restful-api/go-rest-api
 
   build:
     runs-on: ubuntu-latest
@@ -52,10 +57,18 @@ jobs:
         if: steps.changed-files-specific.outputs.any_changed == 'true'
         uses: docker/setup-buildx-action@v2
       -
-        name: Build and push
+        name: Build and push RESTful API Docker image
         if: steps.changed-files-specific.outputs.any_changed == 'true'
         uses: docker/build-push-action@v3
         with:
           context: "{{defaultContext}}:restful-api/go-rest-api"
           push: true
-          tags: soyrodericus/restfulapi:actions-t1
+          tags: soyrodericus/restfulapi:latest
+      -
+        name: Build and push JWTGenerator Docker image
+        if: steps.changed-files-specific.outputs.any_changed == 'true'
+        uses: docker/build-push-action@v3
+        with:
+          context: "{{defaultContext}}:restful-api/jwt-generator"
+          push: true
+          tags: soyrodericus/jwtgenerator:latest

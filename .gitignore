@@ -1,7 +1,5 @@
-restful-api/go-rest-api/go-rest-api
-restful-api/jwt-generator/jwt-generator
-notes.txt
-commnad-to-test-endpoint.sh
 **/.terraform/
+terraform/kubeconfig**
+commnad-to-test-endpoint.sh
+notes.txt
 to-do.md
-terraform/lke-cluster-config.yaml

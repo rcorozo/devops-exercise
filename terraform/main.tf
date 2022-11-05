@@ -7,7 +7,13 @@ terraform {
   }
 }
 
-provider "linode" {
+provider "linode" {}
+
+provider "local" {}
+
+locals {
+  // Decode the Kubeconfig so we can access the individual fields.
+  kubeconfig = base64decode(linode_lke_cluster.bpiche-assessment.kubeconfig)
 }
 
 resource "linode_lke_cluster" "bpiche-assessment" {
@@ -22,9 +28,9 @@ resource "linode_lke_cluster" "bpiche-assessment" {
     }
 }
 
-output "kubeconfig" {
-   value = linode_lke_cluster.bpiche-assessment.kubeconfig
-   sensitive = true
+resource "local_file" "kubeconfig" {
+  content  = local.kubeconfig
+  filename = "kubeconfig.yaml"
 }
 
 output "api_endpoints" {

@@ -25,4 +25,4 @@ spec:
           service:
             name: jwt-generator
             port:
-              number: 9001
+              number: 8080
