@@ -10,7 +10,7 @@ import (
 	jwt "github.com/dgrijalva/jwt-go"
 )
 
-var mySigningKey = []byte("captainjacksparrowsayshi")
+var mySigningKey = []byte(os.Getenv("mySigningKey"))
 
 func homePage(w http.ResponseWriter, r *http.Request) {
 	validToken, err := GenerateJWT()

@@ -23,7 +23,7 @@ type serverReplyMessage struct {
     ReplyMessage string `json:"message"`
 }
 
-var mySigningKey = []byte("captainjacksparrowsayshi")
+var mySigningKey = []byte(os.Getenv("mySigningKey"))
 var myAPIKey = os.Getenv("myAPIKey")
 
 func devOps(w http.ResponseWriter, r *http.Request) {
