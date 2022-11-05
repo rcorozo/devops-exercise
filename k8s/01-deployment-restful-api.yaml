@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: jwt-generator
-        image: soyrodericus/jwtgenerator:$IMAGE_REF
+        image: soyrodericus/jwtgenerator:IMAGE_REF
         imagePullPolicy: Always
         env:
         - name: mySigningKey
@@ -42,7 +42,7 @@ spec:
     spec:
       containers:
       - name: restful-api
-        image: soyrodericus/restfulapi:$IMAGE_REF
+        image: soyrodericus/restfulapi:IMAGE_REF
         imagePullPolicy: Always
         env:
         - name: myAPIKey

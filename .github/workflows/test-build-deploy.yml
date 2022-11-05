@@ -90,15 +90,15 @@ jobs:
       url: https://restapi.rodrigocorozo.com
     steps:
       -
-        name: Install some OS packages
+        name: Updating Docker images name
+        env:
+          imageName: ${{ needs.build.outputs.imageName }}
         run: |
-          sudo apt update
-          sudo apt install -y gettext-base
+          sed -i "s/IMAGE_REF/$imageName/g" "k8s/01-deployment-restful-api.yaml"
       -
         name: Deployment update
         uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
-          IMAGE_REF: ${{ needs.build.outputs.imageName }}
         with:
-          args: envsubst < k8s/01-deployment-restful-api.yaml | kubectl apply -f -
+          args: apply -f k8s/01-deployment-restful-api.yaml
