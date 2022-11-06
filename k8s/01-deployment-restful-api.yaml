@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: jwt-generator
+  name: jwt-generator-deploy
 spec:
   replicas: 3
   selector:
     matchLabels:
-      role: jwt-generator
+      app: jwt-generator
   template:
     metadata:
       labels:
-        role: jwt-generator
+        app: jwt-generator
     spec:
       containers:
       - name: jwt-generator
@@ -29,16 +29,16 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: restful-api
+  name: restful-api-deploy
 spec:
   replicas: 3
   selector:
     matchLabels:
-      role: restful-api
+      app: restful-api
   template:
     metadata:
       labels:
-        role: restful-api
+        app: restful-api
     spec:
       containers:
       - name: restful-api
@@ -62,22 +62,26 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: jwt-generator
+  name: jwt-generator-svc
+  labels:
+    app: jwt-generator
 spec:
   ports:
   - port: 8080
     targetPort: 9001
   selector:
-    role: jwt-generator
+    app: jwt-generator
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: restful-api
+  name: restful-api-svc
+  labels:
+    app: restful-api
 spec:
   ports:
   - port: 8080
     targetPort: 8080
   selector:
-    role: restful-api
+    app: restful-api

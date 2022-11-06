@@ -1,7 +1,7 @@
 #!/bin/bash
 
 HOST="restapi.rodrigocorozo.com"
-JWT="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJjbGllbnQiOiJCUElDSEUiLCJleHAiOjE2Njc3MzYzNzZ9.tvGu2XF_HC8lbDXHfJy9daQzoz-sL2p88y8-HcWZxxo"
+JWT="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJjbGllbnQiOiJCUElDSEUiLCJleHAiOjE2Njc3NzExOTZ9._SkF6pOh9ZXvDxowktBGxufOuaJHwuw2JloF5SM9HqQ"
 
 curl -X POST \
 -H "X-Parse-REST-API-Key: 2f5ae96c-b558-4c7b-a590-a501ae1c3f6c" \

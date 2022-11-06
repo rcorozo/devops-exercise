@@ -23,8 +23,19 @@ resource "linode_lke_cluster" "bpiche-assessment" {
     tags        = ["terraform"]
 
     pool {
-        type  = "g6-standard-2"
+        type  = "g6-standard-1"
         count = 3
+
+        autoscaler {
+          min = 3
+          max = 5
+        }
+    }
+
+    lifecycle {
+        ignore_changes = [
+            pool.0.count
+        ]
     }
 }
 
