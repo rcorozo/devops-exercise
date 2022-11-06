@@ -4,7 +4,7 @@ BPICHE - DevOps Technical Assessment
 
 ## How to test the RESTful API
 
-1. Generate a JWT in: [jwt.rodrigocorozo.com]()
+1. Generate a JWT in: [jwt.rodrigocorozo.com](jwt.rodrigocorozo.com)
 
 2. You can either use bash/test-endpoint.sh or the following command:
    
