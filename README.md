@@ -18,4 +18,4 @@ BPICHE - DevOps Technical Assessment
    ```
 **Note:** remember to change ${JWT} to the generated JWT in step one.
 
-- RESTful API URL: restapi.rodrigocorozo.com
+- RESTful API URL: [restapi.rodrigocorozo.com](https://restapi.rodrigocorozo.com)
