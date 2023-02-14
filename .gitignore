@@ -1,7 +1,7 @@
 **/.terraform/
 *.tfstate
 *.tfstate.*
-k8s/*secret.yaml
+k8s/**/*secret.yaml
 terraform/kubeconfig*
 commnad-to-test-endpoint.sh
 notes.txt
