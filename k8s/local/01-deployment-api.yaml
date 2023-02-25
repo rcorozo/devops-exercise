@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: jwt-generator-deploy
 spec:
-  replicas: 3
+  replicas: 5
   selector:
     matchLabels:
       app: jwt-generator
@@ -31,7 +31,7 @@ kind: Deployment
 metadata:
   name: restful-api-deploy
 spec:
-  replicas: 3
+  replicas: 5
   selector:
     matchLabels:
       app: restful-api
