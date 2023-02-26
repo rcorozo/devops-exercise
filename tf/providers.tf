@@ -16,7 +16,7 @@ provider "linode" {
 }
 
 provider "kubernetes" {
-  config_path = linode_lke_cluster.this.kubeconfig
+  config_path = local_file.kubeconfig.content
 }
 
 provider "local" {}

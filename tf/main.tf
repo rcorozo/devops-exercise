@@ -1,7 +1,7 @@
-# locals {
-#   Decode the Kubeconfig so we can access the individual fields.
-#   kubeconfig = base64decode(linode_lke_cluster.this.kubeconfig)
-# }
+locals {
+  # Decode the Kubeconfig so we can access the individual fields.
+  kubeconfig = base64decode(linode_lke_cluster.this.kubeconfig)
+}
 
 resource "linode_lke_cluster" "this" {
   label       = var.cluster_label
@@ -26,7 +26,7 @@ resource "linode_lke_cluster" "this" {
   }
 }
 
-# resource "local_file" "kubeconfig" {
-#   content  = local.kubeconfig
-#   filename = "kubeconfig.yaml"
-# }
+resource "local_file" "kubeconfig" {
+  content  = local.kubeconfig
+  filename = "kubeconfig.yaml"
+}
