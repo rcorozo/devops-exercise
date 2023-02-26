@@ -2,7 +2,7 @@
 *.tfstate
 *.tfstate.*
 k8s/**/*secret.yaml
-terraform/kubeconfig*
+tf/kubeconfig*
 commnad-to-test-endpoint.sh
 notes.txt
 to-do.md
