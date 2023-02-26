@@ -1,7 +1,7 @@
-locals {
-  // Decode the Kubeconfig so we can access the individual fields.
-  kubeconfig = base64decode(linode_lke_cluster.this.kubeconfig)
-}
+# locals {
+#   Decode the Kubeconfig so we can access the individual fields.
+#   kubeconfig = base64decode(linode_lke_cluster.this.kubeconfig)
+# }
 
 resource "linode_lke_cluster" "this" {
   label       = var.cluster_label
@@ -11,11 +11,11 @@ resource "linode_lke_cluster" "this" {
 
   pool {
     type  = var.cluster_node_type
-    count = 3
+    count = 1
 
     autoscaler {
-      min = 3
-      max = 5
+      min = 1
+      max = 2
     }
   }
 
@@ -26,7 +26,7 @@ resource "linode_lke_cluster" "this" {
   }
 }
 
-resource "local_file" "kubeconfig" {
-  content  = local.kubeconfig
-  filename = "kubeconfig.yaml"
-}
+# resource "local_file" "kubeconfig" {
+#   content  = local.kubeconfig
+#   filename = "kubeconfig.yaml"
+# }
