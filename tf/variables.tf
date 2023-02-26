@@ -5,7 +5,7 @@ variable "cluster_label" {
 
 variable "k8s_version" {
   description = "Kubernetes version"
-  default     = "1.23"
+  default     = "1.25"
 }
 
 variable "cluster_region" {
