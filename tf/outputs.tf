@@ -3,6 +3,7 @@ output "api_endpoints" {
 }
 
 output "kubeconfig" {
-  value     = nonsensitive(linode_lke_cluster.this.kubeconfig)
+    value     = local_file.kubeconfig.content
+  # value     = nonsensitive(linode_lke_cluster.this.kubeconfig)
   # sensitive = true
 }
