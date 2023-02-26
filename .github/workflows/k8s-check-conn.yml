@@ -2,7 +2,6 @@ name: Check k8s connection
 
 on:
   workflow_dispatch:
-    branches: ['develop']
 
 jobs:
   test:
@@ -15,3 +14,8 @@ jobs:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
         with:
           args: get nodes
+      -
+        uses: WyriHaximus/github-action-helm3@v3
+        with:
+          exec: helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx && helm repo update && helm install ingress-nginx ingress-nginx/ingress-nginx
+          kubeconfig: ${{ secrets.KUBE_CONFIG }}
