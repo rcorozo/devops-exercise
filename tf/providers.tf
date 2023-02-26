@@ -16,7 +16,7 @@ provider "linode" {
 }
 
 provider "kubernetes" {
-  config_path = local_file.kubeconfig
+  config_path = "kubeconfig.yaml"
 }
 
 provider "local" {}
