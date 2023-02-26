@@ -3,6 +3,6 @@ output "api_endpoints" {
 }
 
 output "kubeconfig" {
-  value     = base64decode(linode_lke_cluster.this.kubeconfig)
-  sensitive = true
+  value     = base64decode(nonsensitive(linode_lke_cluster.this.kubeconfig))
+  # sensitive = true
 }
