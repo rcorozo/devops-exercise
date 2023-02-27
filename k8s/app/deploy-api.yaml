@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: jwt-generator-deploy
 spec:
-  replicas: 3
+  replicas: 5
   selector:
     matchLabels:
       app: jwt-generator
@@ -31,7 +31,7 @@ kind: Deployment
 metadata:
   name: restful-api-deploy
 spec:
-  replicas: 3
+  replicas: 5
   selector:
     matchLabels:
       app: restful-api
@@ -57,31 +57,3 @@ spec:
               key: mySigningKey
         ports:
         - containerPort: 8080
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: jwt-generator-svc
-  labels:
-    app: jwt-generator
-spec:
-  ports:
-  - port: 8080
-    targetPort: 9001
-  selector:
-    app: jwt-generator
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: restful-api-svc
-  labels:
-    app: restful-api
-spec:
-  ports:
-  - port: 8080
-    targetPort: 8080
-  selector:
-    app: restful-api

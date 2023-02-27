@@ -100,11 +100,20 @@ jobs:
         env:
           imageName: ${{ needs.build.outputs.imageName }}
         run: |
-          sed -i "s/IMAGE_REF/$imageName/g" "k8s/01-deployment-restful-api.yaml"
+          sed -i "s,soyrodericus/jwtgenerator:.*,soyrodericus/jwtgenerator:$imageName,g" "k8s/app/deploy-api.yaml"
+          sed -i "s,soyrodericus/restfulapi:.*,soyrodericus/restfulapi:$imageName,g" "k8s/app/deploy-api.yaml"
+      - 
+        name: Commit and push changes
+        uses: devops-infra/action-commit-push@master
+        with:
+          github_token: "${{ secrets.GITHUB_TOKEN }}"
+          commit_prefix: "[AUTO] "
+          commit_message: "Updating Docker image tag"
+          target_branch: "${{ github.ref_name }}"
       -
         name: Deployment update
         uses: actions-hub/kubectl@master
         env:
-          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+          KUBE_CONFIG: ${{ secrets.base64_KUBE_CONFIG }}
         with:
-          args: apply -f k8s/01-deployment-restful-api.yaml
+          args: apply -f k8s/app/deploy-api.yaml
