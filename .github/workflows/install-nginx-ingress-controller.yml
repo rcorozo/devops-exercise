@@ -8,7 +8,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       -
+        name: Add ingress-nginx helm repo
         uses: WyriHaximus/github-action-helm3@v3
         with:
           exec: helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx && helm repo update && helm install ingress-nginx ingress-nginx/ingress-nginx
           kubeconfig: ${{ secrets.plain_KUBE_CONFIG }}
+      -
+        name: Install Cluster services
+        uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.base64_KUBE_CONFIG }}
+        with:
+          args: apply -f k8s/svc
