@@ -22,4 +22,4 @@ jobs:
         env:
           KUBE_CONFIG: ${{ secrets.base64_KUBE_CONFIG }}
         with:
-          args: apply -f k8s/svc/02-cert-manager.yaml
+          args: apply -f k8s/svc/*.yaml
