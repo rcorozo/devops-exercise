@@ -19,7 +19,7 @@ spec:
         path: "/DevOps"
         backend:
           service:
-            name: restful-api
+            name: restful-api-svc
             port:
               number: 8080
   - host: jwt.rodrigocorozo.com
@@ -29,6 +29,6 @@ spec:
         path: "/"
         backend:
           service:
-            name: jwt-generator
+            name: jwt-generator-svc
             port:
               number: 8080

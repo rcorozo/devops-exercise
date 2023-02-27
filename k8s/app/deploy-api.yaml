@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: jwt-generator-deploy
 spec:
-  replicas: 5
+  replicas: 3
   selector:
     matchLabels:
       app: jwt-generator
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: jwt-generator
-        image: soyrodericus/jwtgenerator:IMAGE_REF
+        image: soyrodericus/jwtgenerator:main-5ddbb27
         imagePullPolicy: Always
         env:
         - name: mySigningKey
@@ -31,7 +31,7 @@ kind: Deployment
 metadata:
   name: restful-api-deploy
 spec:
-  replicas: 5
+  replicas: 3
   selector:
     matchLabels:
       app: restful-api
@@ -42,7 +42,7 @@ spec:
     spec:
       containers:
       - name: restful-api
-        image: soyrodericus/restfulapi:IMAGE_REF
+        image: soyrodericus/restfulapi:main-5ddbb27
         imagePullPolicy: Always
         env:
         - name: myAPIKey
