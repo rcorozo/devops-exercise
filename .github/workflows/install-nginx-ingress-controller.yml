@@ -15,23 +15,13 @@ jobs:
           kubeconfig: ${{ secrets.plain_KUBE_CONFIG }}
         continue-on-error: true
       -
-        name: Install cert-manager
-        uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.base64_KUBE_CONFIG }}
+        uses: actions/checkout@v3
         with:
-          args: apply -f k8s/svc/02-cert-manager.yaml
+          fetch-depth: 0
       -
-        name: Install ssl-issuer
+        name: Install Cluster services
         uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.base64_KUBE_CONFIG }}
         with:
-          args: apply -f k8s/svc/03-ssl-issuer.yaml
-      -
-        name: Install ingress
-        uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.base64_KUBE_CONFIG }}
-        with:
-          args: apply -f k8s/svc/04-ingress.yaml
+          args: apply -f 'k8s/svc/*.yaml'
