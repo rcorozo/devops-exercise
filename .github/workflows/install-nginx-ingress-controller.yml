@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
+  install-ingress-controller:
     runs-on: ubuntu-latest
     steps:
       -
@@ -19,4 +19,4 @@ jobs:
         env:
           KUBE_CONFIG: ${{ secrets.base64_KUBE_CONFIG }}
         with:
-          args: apply -f k8s/svc
+          args: apply -f 'k8s/svc/*.yaml'
