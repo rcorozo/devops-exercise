@@ -19,3 +19,5 @@ variable "cluster_node_type" {
 }
 
 variable "linode_token" {}
+
+variable "github_token" {}

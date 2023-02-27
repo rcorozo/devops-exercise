@@ -4,9 +4,9 @@ terraform {
       source  = "linode/linode"
       version = "1.27.1"
     }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "2.18.1"
+    github = {
+      source  = "integrations/github"
+      version = "5.18.0"
     }
   }
 }
@@ -15,8 +15,6 @@ provider "linode" {
   token = var.linode_token
 }
 
-provider "kubernetes" {
-  config_path = linode_lke_cluster.this.kubeconfig
+provider "github" {
+  token = var.github_token
 }
-
-provider "local" {}
