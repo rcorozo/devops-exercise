@@ -1,23 +1,25 @@
-name: Install Argo CD
+name: Install App
 
 on:
   workflow_dispatch:
 
 jobs:
-  install-argocd:
+  install-app:
     runs-on: ubuntu-latest
     steps:
       -
-        name: Install Argo CD
-        uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.base64_KUBE_CONFIG }}
-        with:
-          args: apply -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+        uses: actions/checkout@v1
       -
-        name: Install Argo CD App
+        name: Apply svc
         uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.base64_KUBE_CONFIG }}
         with:
-          args: apply -f https://raw.githubusercontent.com/rcorozo/devops-exercise/main/k8s/application.yaml
+          args: apply -f k8s/app/svc-api.yaml
+      -
+        name: Apply deploy
+        uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.base64_KUBE_CONFIG }}
+        with:
+          args: apply -f k8s/app/deploy-api.yaml
