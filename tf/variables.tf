@@ -15,7 +15,7 @@ variable "cluster_region" {
 
 variable "cluster_node_type" {
   description = "LKE Cluster node type"
-  default     = "g6-standard-1"
+  default     = "g6-standard-2"
 }
 
 variable "linode_token" {}
