@@ -1,3 +1,5 @@
+# This comment was added to test Infracost (Terraform plugin)
+
 resource "linode_lke_cluster" "this" {
   label       = var.cluster_label
   k8s_version = var.k8s_version
